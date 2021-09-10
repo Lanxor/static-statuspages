@@ -1,0 +1,59 @@
+{
+  "page1": {
+    "config": {
+      "template": "templates/basic.html.j2",
+      "target": "statuspages.html"
+    },
+    "infos": {
+      "title": "Status Page",
+      "buttons": [
+        {
+          "title": "Homepage",
+          "url": "#"
+        }
+      ],
+      "lastupdate": "2020-01-01 10:33:42"
+    },
+    "services": {
+      "1": {
+        "name": "Webserver",
+        "information": "Webserver respond ok",
+        "description": "no description",
+        "status": "ok",
+        "card": "2"
+      },
+      "2": {
+        "name": "Database access",
+        "information": "Access refused",
+        "description": "no description",
+        "status": "ko",
+        "card": "1"
+      }
+    },
+    "cards": {
+      "0": {
+        "metadata": {
+          "title": "Maintenance",
+          "type": "text",
+          "icon": "fa-wrench"
+        }
+      },
+      "1": {
+        "metadata": {
+          "title": "Outage",
+          "type": "list",
+          "color": "red",
+          "icon": "fa-times"
+        }
+      },
+      "2": {
+        "metadata": {
+          "title": "Operational",
+          "type": "list",
+          "color": "green",
+          "icon": "fa-check"
+        }
+      }
+    }
+  }
+}

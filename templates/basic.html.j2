@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ infos.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+
+    <div class="pb-2 mt-5 mb-2 border-bottom">
+    	<h1>
+    		{{ infos.title }}
+    		<span class="float-right d-none d-sm-block">
+{% for button in infos.buttons %}
+    			<a href="{{ button.url }}" class="btn btn-primary" role="button">
+    				<i class="fas fa-home"></i>
+    				{{ button.title }}
+    			</a>
+{% endfor %}
+    		</span>
+    	</h1>
+    </div>
+
+{% for cardName in cards %}
+{% if cards[cardName].metadata.type == 'text' and cards[cardName].data is defined  %}
+    <div class="card my-3">
+      <div class="card-header">
+        <i class="fas {{ cards[cardName].metadata.icon }}"></i>
+        {{ cards[cardName].metadata.title }}
+      </div>
+      <div class="card-body">
+        {{ cards[cardName].data.message }}
+      </div>
+    </div>
+{% elif cards[cardName].metadata.type == 'list' and cards[cardName].data | length > 0 %}
+    <div class="my-3">
+    	<ul class="list-group">
+{% if cards[cardName].metadata.color == 'green' %}
+    		<li class="list-group-item list-group-item-success">{{ cards[cardName].metadata.title }}</li>
+{% elif cards[cardName].metadata.color == 'red' %}
+        <li class="list-group-item list-group-item-danger">{{ cards[cardName].metadata.title }}</li>
+{% endif %}
+{% for service in cards[cardName].data %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ service.name }}: {{ service.information }}
+{% if service.icon is defined %}
+          <span class="badge badge-pill badge-dark"><i class="fas {{ service.icon }}"></i></span>
+{% elif cards[cardName].metadata.icon is defined %}
+          <span class="badge badge-pill badge-dark"><i class="fas {{ cards[cardName].metadata.icon }}"></i> </span>
+{% endif %}
+        </li>
+{% endfor %}
+      </ul>
+    </div>
+{% endif %}
+{% endfor %}
+
+    <hr class="mt-4">
+
+    <footer>
+      <p>Powered by static-statuspages</p>
+      <p class="text-muted">Last data update {{ infos.lastupdate }}</p>
+      <p class="text-muted">Page generated at {{ datetime }}</p>
+    </footer>
+
+    </div>
+  </body>
+</html>
